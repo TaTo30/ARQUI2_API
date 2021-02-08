@@ -1,4 +1,4 @@
-const {Router, response} = require('express')
+const {Router} = require('express')
 const pgconnect = require('../config/connection')
 
 const router = Router()

@@ -6,7 +6,6 @@ var connectSetup = {
     database: 'Arqui2_Pruebas'
 }
 
-
 if (process.env.DATABASE_URL) {
     connectSetup = {
         connectionString: process.env.DATABASE_URL,
@@ -15,7 +14,6 @@ if (process.env.DATABASE_URL) {
         }
     }
 }
-
 
 const pool = new Pool(connectSetup)
 
