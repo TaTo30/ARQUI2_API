@@ -17,7 +17,6 @@ if (process.env.DATABASE_URL) {
 }
 
 
-
 const pool = new Pool(connectSetup)
 
 exports.cn = pool
