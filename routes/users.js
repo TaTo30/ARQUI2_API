@@ -1,8 +1,12 @@
-const {Router} = require('express')
+const {Router, response} = require('express')
 const pgconnect = require('../config/connection')
 
 const router = Router()
 const PG_POOL = pgconnect.cn;
+
+router.get('/', (request, response) => {
+    response.send("Funcionando")
+})
 
 router.get('/getUsers', (request, response) => {
     let query = 'select * from usuarios'
