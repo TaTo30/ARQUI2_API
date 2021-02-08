@@ -38,8 +38,9 @@ router.post('/setUsers', (request, response) => {
 
 router.post('/validateUsers', (request, response) => {
     user = request.body;
-    let query = `select 1 'user' from usuarios
-    where nombres = '${user.usuario}' and password = '${user.password}'`
+    let query = `select exists(
+        select 1 from usuarios 
+        where nombres = '${user.usuario}' and password = '${user.password}') as result;`
     PG_POOL.query(query, (err, res) => {
         if (err) {
             console.error(err);
