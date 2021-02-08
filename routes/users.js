@@ -36,4 +36,18 @@ router.post('/setUsers', (request, response) => {
     })
 })
 
+router.post('/validateUsers', (request, response) => {
+    user = request.body;
+    let query = `select 1 from usuarios
+    where nombres = '${user.usuario}' and password = '${user.password}'`
+    PG_POOL.query(query, (err, res) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log(res);
+            response.send(res.rows);
+        }
+    })
+})
+
 module.exports = router
