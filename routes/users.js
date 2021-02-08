@@ -5,6 +5,7 @@ const router = Router()
 const PG_POOL = pgconnect.cn;
 
 router.get('/getUsers', (request, response) => {
+    console.log(process.env.DATABASE_URL);
     let query = 'select * from usuarios'
     PG_POOL.query(query, (err, res) => {
         if (err) {

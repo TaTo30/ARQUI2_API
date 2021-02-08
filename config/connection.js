@@ -1,15 +1,22 @@
 const {Pool} = require('pg')
 
 var connectSetup = {
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-       rejectUnauthorized: false
-    }
-   } || {
     user: 'postgres',
     host: 'localhost',
     database: 'Arqui2_Pruebas'
 }
+
+
+if (process.env.DATABASE_URL) {
+    connectSetup = {
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+           rejectUnauthorized: false
+        }
+    }
+}
+
+
 
 const pool = new Pool(connectSetup)
 
