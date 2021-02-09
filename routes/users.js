@@ -1,4 +1,5 @@
-const {Router} = require('express')
+const {Router, request, response} = require('express')
+const Usuario = require('../models/usuarios')
 const pgconnect = require('../config/connection')
 
 const router = Router()
@@ -8,45 +9,54 @@ router.get('/', (request, response) => {
     response.send("Funcionando")
 })
 
-router.get('/getUsers', (request, response) => {
-    let query = 'select * from usuarios'
+router.post('/getUser', (request, response) => {
+    const User = new Usuario();
+    User.Data(request.body.usuario)
+    let query = User.Query()
     PG_POOL.query(query, (err, res) => {
         if (err) {
-            console.error(err);
+            response.send(User.Response(false, err.message));
         }else{
-            console.log(res.rows);
-            response.send(res.rows);
+            response.send(User.Response(true, res.rows));
         }
     })
 });
 
-router.post('/setUsers', (request, response) => {
-    user = request.body;
-    let query = `insert into usuarios (nombres, apellidos, edad, sexo, peso, estatura)
-    values('${user.nombres}', '${user.apellidos}', ${user.edad}, '${user.sexo}', ${user.peso}, ${user.estatura})`
+router.post('/newUser', (request, response) => {
+    const User = new Usuario();
+    User.Data(request.body)
+    let query = User.Query()
     PG_POOL.query(query, (err, res) => {
         if (err) {
-            console.error(err);
+            response.send(User.Response(false, err.message));
         } else {
-            console.log(res);
-            response.send({
-                'status':'recibido'
-            })
+            response.send(User.Response(true, {oid: res.oid, rowCount: res.rowCount}))
         }
     })
 })
 
-router.post('/validateUsers', (request, response) => {
-    user = request.body;
-    let query = `select exists(
-        select 1 from usuarios 
-        where nombres = '${user.usuario}' and password = '${user.password}') as result;`
+router.post('/validateUser', (request, response) => {
+    const User = new Usuario();
+    User.Data(request.body.usuario, request.body.password)
+    let query = User.Query();
     PG_POOL.query(query, (err, res) => {
         if (err) {
-            console.error(err);
+            response.send(User.Response(false, err.message))
         } else {
-            console.log(res);
-            response.send(res.rows);
+            response.send(User.Response(true, res.rows))
+        }
+    })
+})
+
+router.post('/setCoach', (request, response) => {
+    const User = new Usuario();
+    User.Data(request.body.trainee, request.body.coach, 0)
+    let query = User.Query();
+    PG_POOL.query(query, (err, res) => {
+        if (err) {
+            response.send(User.Response(false, err.message))
+        } else {
+            response.send(User.Response(true, {oid: res.oid, rewCount: res.rowCount}))
         }
     })
 })
