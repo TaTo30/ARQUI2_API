@@ -1,18 +1,19 @@
 {
-  "name": "APIREST_ACYE2_Grupo21",
+  "name": "apirest_acye1_grupo21",
   "version": "1.0.0",
   "description": "API REST para el objeto IOT de Arquitectura de computadoras y Ensambladores 2 Grupo 21",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nodemon index.js",
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Aldo Hernandez",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dateformat": "^4.5.1",
     "express": "^4.17.1",
     "md5": "^2.3.0",
     "pg": "^8.5.1"

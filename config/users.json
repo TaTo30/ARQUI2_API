@@ -1,0 +1,55 @@
+{
+    "/newUser": [
+        {
+            "usuario": "aldoh",
+            "password": "81dc9bdb52d04dc20036dbd8313ed055",
+            "nombres": "Aldo Rigoberto",
+            "apellidos": "Hernandez Avila",
+            "edad": 20,
+            "sexo": "M",
+            "peso": 71.1,
+            "estatura": 171.2
+        },
+        {
+            "usuario": "luisP",
+            "password": "56eaf8ce718f088585a327f4015da0b2",
+            "nombres": "Luis Gabriel",
+            "apellidos": "Lopez Polanco",
+            "edad": 22,
+            "sexo": "M",
+            "peso": 78.1,
+            "estatura": 185.2
+        },
+        {
+            "usuario": "honaje",
+            "password": "81dc9bdb52d04dc20036dbd8313ed055",
+            "nombres": "Honathan",
+            "apellidos": "Jimenez Estrada",
+            "edad": 23,
+            "sexo": "M",
+            "peso": 80.1,
+            "estatura": 182.2
+        },
+        {
+            "usuario": "prwiei",
+            "password": "1235",
+            "nombres": "Pedro Carlo",
+            "apellidos": "Polanco Elias",
+            "edad": 18,
+            "sexo": "M",
+            "peso": 60.1,
+            "estatura": 150
+        }
+    ],
+    "/validateUser": {
+        "usuario": "aldoh",
+        "password": "1234"
+    },
+    "/getUser": {
+        "usuario": "aldoh"
+    },
+    "/setUser": {
+        "trainee": "luisP",
+        "coach": "aldoh"
+    }
+}

@@ -9,6 +9,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use(require('./routes/users'))
+app.use(require('./routes/registers'))
 
 app.listen(PORT, () => {
     console.log(`API REST inicializada en ${PORT}`);

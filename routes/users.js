@@ -1,5 +1,5 @@
-const {Router, request, response} = require('express')
-const Usuario = require('../models/usuarios')
+const Router = require('express')
+const {Usuario, Type} = require('../models/usuarios')
 const pgconnect = require('../config/connection')
 
 const router = Router()
@@ -11,7 +11,7 @@ router.get('/', (request, response) => {
 
 router.post('/getUser', (request, response) => {
     const User = new Usuario();
-    User.Data(request.body.usuario)
+    User.Data(Type.GETUSER, request.body)
     let query = User.Query()
     PG_POOL.query(query, (err, res) => {
         if (err) {
@@ -24,7 +24,7 @@ router.post('/getUser', (request, response) => {
 
 router.post('/newUser', (request, response) => {
     const User = new Usuario();
-    User.Data(request.body)
+    User.Data(Type.NEWUSER, request.body)
     let query = User.Query()
     PG_POOL.query(query, (err, res) => {
         if (err) {
@@ -37,7 +37,7 @@ router.post('/newUser', (request, response) => {
 
 router.post('/validateUser', (request, response) => {
     const User = new Usuario();
-    User.Data(request.body.usuario, request.body.password)
+    User.Data(Type.VALIDATEUSER, request.body)
     let query = User.Query();
     PG_POOL.query(query, (err, res) => {
         if (err) {
@@ -50,15 +50,30 @@ router.post('/validateUser', (request, response) => {
 
 router.post('/setCoach', (request, response) => {
     const User = new Usuario();
-    User.Data(request.body.trainee, request.body.coach, 0)
+    User.Data(Type.SETCOACH, request.body)
     let query = User.Query();
     PG_POOL.query(query, (err, res) => {
         if (err) {
             response.send(User.Response(false, err.message))
         } else {
-            response.send(User.Response(true, {oid: res.oid, rewCount: res.rowCount}))
+            response.send(User.Response(true, {oid: res.oid, rowCount: res.rowCount}))
         }
     })
 })
+
+router.post('/updateUser', (request, response) => {
+    const User = new Usuario();
+    User.Data(Type.UPDATEUSER, request.body)
+    let query = User.Query();
+    PG_POOL.query(query, (err, res) => {
+        if (err) {
+            response.send(User.Response(false, err.message))
+        } else {
+            response.send(User.Response(true, {oid: res.oid, rowCount: res.rowCount}))
+        }
+    })
+})
+
+
 
 module.exports = router
